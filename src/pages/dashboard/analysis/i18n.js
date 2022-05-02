@@ -2,13 +2,13 @@ module.exports = {
   messages: {
     CN: {
       introduce: '指标说明',
-      totalSales: '总销售额',
-      visits: '访问量',
+      totalSales: '今日销售额',
+      visits: '今日订单数',
       payments: '支付笔数',
-      operating: '运营活动效果',
+      operating: '账户余额',
       wow: '同周比',
       dod: '日环比',
-      sales: '销售额',
+      sales: '今日交易额',
       daily: '日均',
       day: '今日',
       week: '本周',

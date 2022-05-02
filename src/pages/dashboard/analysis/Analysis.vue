@@ -3,21 +3,6 @@
     <a-row style="margin-top: 0" :gutter="[24, 24]">
       <a-col :sm="24" :md="12" :xl="6">
         <chart-card :loading="loading" :title="$t('totalSales')" total="￥ 189,345">
-          <a-tooltip :title="$t('introduce')" slot="action">
-            <a-icon type="info-circle-o" />
-          </a-tooltip>
-          <div>
-            <trend style="margin-right: 16px" :term="$t('wow')" :percent="12" :is-increase="true" :scale="0" />
-            <trend :term="$t('dod')" :target="100" :value="89" :scale="0" />
-          </div>
-          <div slot="footer">{{$ta('daily|sales', 'p')}}<span> ￥234.56</span></div>
-        </chart-card>
-      </a-col>
-      <a-col :sm="24" :md="12" :xl="6">
-        <chart-card :loading="loading" :title="$t('visits')" total="￥ 189,345">
-          <a-tooltip :title="$t('introduce')" slot="action">
-            <a-icon type="info-circle-o" />
-          </a-tooltip>
           <div>
             <mini-area />
           </div>
@@ -25,16 +10,20 @@
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6">
-        <chart-card :loading="loading" :title="$t('operating')" total="73%">
-          <a-tooltip :title="$t('introduce')" slot="action">
-            <a-icon type="info-circle-o" />
-          </a-tooltip>
+        <chart-card :loading="loading" :title="$t('visits')" total=" 201 笔">
+          <div>
+            <mini-area />
+          </div>
+          <div slot="footer">{{$ta('daily|visits', 'p')}}<span> 123,4</span></div>
+        </chart-card>
+      </a-col>
+      <a-col :sm="24" :md="12" :xl="6">
+        <chart-card :loading="loading" :title="$t('operating')" total="49 元">
           <div>
             <mini-progress target="90" percent="78" color="#13C2C2" height="8px"/>
           </div>
-          <div slot="footer" style="white-space: nowrap;overflow: hidden">
-            <trend style="margin-right: 16px" :term="$t('wow')" :percent="12" :is-increase="true" :scale="0" />
-            <trend :term="$t('dod')" :target="100" :value="89" :scale="0" />
+          <div slot="footer">
+            <span style="color: #FF0000;"> <strong>目前余额已低于警戒线，请尽快充值</strong> </span>
           </div>
         </chart-card>
       </a-col>
@@ -53,42 +42,36 @@
           </div>
           <a-tab-pane loading="true" :tab="$t('sales')" key="1">
             <a-row>
-              <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
+              <a-col :xl="116" :lg="112" :md="112" :sm="124" :xs="124">
                 <bar :title="$ta('stores|sales|trend', 'p')" />
-              </a-col>
-              <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
-                <ranking-list :title="$ta('stores|sales|ranking', 'p')" :list="rankList"/>
               </a-col>
             </a-row>
           </a-tab-pane>
-          <a-tab-pane :tab="$t('visits')" key="2"><a-row>
-            <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-              <bar :title="$ta('visits|trend', 'p')" />
-            </a-col>
-            <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
-              <ranking-list :title="$ta('stores|visits|ranking', 'p')" :list="rankList"/>
-            </a-col>
-          </a-row></a-tab-pane>
         </a-tabs>
       </div>
     </a-card>
-    <a-row style="margin: 0 -12px">
-      <a-col style="padding: 0 12px" :xl="12" :lg="24" :md="24" :sm="24" :xs="24">
-        <a-card :loading="loading" :bordered="false" style="margin-top: 24px" :title="$t('search')">
-          <hot-search />
-        </a-card>
-      </a-col>
-      <a-col style="padding: 0 12px" :xl="12" :lg="24" :md="24" :sm="24" :xs="24">
-        <a-card :loading="loading" :bordered="false" style="margin-top: 24px;" :title="$t('proportion')">
-          <sales-data />
-          <a-radio-group slot="extra" style="margin: -12px 0">
-            <a-radio-button value="a">{{$t('all')}}</a-radio-button>
-            <a-radio-button value="b">{{$t('online')}}</a-radio-button>
-            <a-radio-button value="c">{{$t('stores')}}</a-radio-button>
-          </a-radio-group>
-        </a-card>
-      </a-col>
-    </a-row>
+    <a-card :loading="loading" style="margin-top: 24px" :bordered="false" :body-style="{padding: '24px'}">
+      <div class="salesCard">
+        <a-tabs default-active-key="1" size="large" :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px'}">
+          <div class="extra-wrap" slot="tabBarExtraContent">
+            <div class="extra-item">
+              <a>{{$t('day')}}</a>
+              <a>{{$t('week')}}</a>
+              <a>{{$t('month')}}</a>
+              <a>{{$t('year')}}</a>
+            </div>
+            <a-range-picker :style="{width: '256px'}"></a-range-picker>
+          </div>
+          <a-tab-pane loading="true" :tab="$t('visits')" key="1">
+            <a-row>
+              <a-col :xl="116" :lg="112" :md="112" :sm="124" :xs="124">
+                <bar :title="$ta('stores|sales|trend', 'p')" />
+              </a-col>
+            </a-row>
+          </a-tab-pane>
+        </a-tabs>
+      </div>
+    </a-card>
   </div>
 </template>
 
@@ -97,10 +80,6 @@ import ChartCard from '../../../components/card/ChartCard'
 import MiniArea from '../../../components/chart/MiniArea'
 import MiniProgress from '../../../components/chart/MiniProgress'
 import Bar from '../../../components/chart/Bar'
-import RankingList from '../../../components/chart/RankingList'
-import HotSearch from './HotSearch'
-import SalesData from './SalesData'
-import Trend from '../../../components/chart/Trend'
 
 const rankList = []
 
@@ -123,7 +102,7 @@ export default {
   created() {
     setTimeout(() => this.loading = !this.loading, 1000)
   },
-  components: {Trend, SalesData, HotSearch, RankingList, Bar, MiniProgress, MiniArea, ChartCard}
+  components: {Bar, MiniProgress, MiniArea, ChartCard}
 }
 </script>
 
