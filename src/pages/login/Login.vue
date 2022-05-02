@@ -2,15 +2,14 @@
   <common-layout>
     <div class="top">
       <div class="header">
-        <img alt="logo" class="logo" src="@/assets/img/logo.png" />
+        <img alt="logo" class="logo" src="@/assets/img/panda.png" />
         <span class="title">{{systemName}}</span>
       </div>
-      <div class="desc">Ant Design 是西湖区最具影响力的 Web 设计规范</div>
     </div>
     <div class="login">
       <a-form @submit="onSubmit" :form="form">
         <a-tabs size="large" :tabBarStyle="{textAlign: 'center'}" style="padding: 0 2px;">
-          <a-tab-pane tab="账户密码登录" key="1">
+          <a-tab-pane tab="邮箱登录" key="1">
             <a-alert type="error" :closable="true" v-show="error" :message="error" showIcon style="margin-bottom: 24px;" />
             <a-form-item>
               <a-input
@@ -36,14 +35,14 @@
           </a-tab-pane>
           <a-tab-pane tab="手机号登录" key="2">
             <a-form-item>
-              <a-input size="large" placeholder="mobile number" >
+              <a-input size="large" placeholder="请输入手机号" >
                 <a-icon slot="prefix" type="mobile" />
               </a-input>
             </a-form-item>
             <a-form-item>
               <a-row :gutter="8" style="margin: 0 -4px">
                 <a-col :span="16">
-                  <a-input size="large" placeholder="captcha">
+                  <a-input size="large" placeholder="请输入验证码">
                     <a-icon slot="prefix" type="mail" />
                   </a-input>
                 </a-col>
@@ -63,10 +62,10 @@
         </a-form-item>
         <div>
           其他登录方式
-          <a-icon class="icon" type="alipay-circle" />
-          <a-icon class="icon" type="taobao-circle" />
+          <a-icon class="icon" type="wechat" /> 
+          <a-icon class="icon" type="qq" />
           <a-icon class="icon" type="weibo-circle" />
-          <router-link style="float: right" to="/dashboard/workplace" >注册账户</router-link>
+          <router-link style="float: right" to="/dashboard" >注册账户</router-link>
         </div>
       </a-form>
     </div>
@@ -121,7 +120,7 @@ export default {
         getRoutesConfig().then(result => {
           const routesConfig = result.data.data
           loadRoutes(routesConfig)
-          this.$router.push('/dashboard/workplace')
+          this.$router.push('/dashboard')
           this.$message.success(loginRes.message, 3)
         })
       } else {

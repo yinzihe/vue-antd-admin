@@ -6,7 +6,7 @@
       </a>
     </div>
     <div class="copyright">
-      Copyright<a-icon type="copyright" />{{copyright}}
+      版权所有<a-icon type="copyright" />{{copyright}}
     </div>
   </div>
 </template>

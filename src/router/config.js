@@ -1,5 +1,4 @@
 import TabsView from '@/layouts/tabs/TabsView'
-import BlankView from '@/layouts/BlankView'
 import PageView from '@/layouts/PageView'
 
 // 路由配置
@@ -28,34 +27,18 @@ const options = {
       children: [
         {
           path: 'dashboard',
-          name: 'Dashboard',
+          name: '销售数据',
           meta: {
             icon: 'dashboard'
           },
-          component: BlankView,
-          children: [
-            {
-              path: 'workplace',
-              name: '工作台',
-              meta: {
-                page: {
-                  closable: false
-                }
-              },
-              component: () => import('@/pages/dashboard/workplace'),
-            },
-            {
-              path: 'analysis',
-              name: '分析页',
-              component: () => import('@/pages/dashboard/analysis'),
-            }
-          ]
+          component: () => import('@/pages/dashboard/analysis')
+
         },
         {
           path: 'form',
-          name: '表单页',
+          name: '支付渠道',
           meta: {
-            icon: 'form',
+            icon: 'pay-circle',
             page: {
               cacheAble: false
             }
@@ -64,24 +47,14 @@ const options = {
           children: [
             {
               path: 'basic',
-              name: '基础表单',
+              name: '我的支付渠道',
               component: () => import('@/pages/form/basic'),
-            },
-            {
-              path: 'step',
-              name: '分步表单',
-              component: () => import('@/pages/form/step'),
-            },
-            {
-              path: 'advance',
-              name: '高级表单',
-              component: () => import('@/pages/form/advance'),
             }
           ]
         },
         {
           path: 'list',
-          name: '列表页',
+          name: '订单管理',
           meta: {
             icon: 'table'
           },
@@ -89,7 +62,7 @@ const options = {
           children: [
             {
               path: 'query',
-              name: '查询表格',
+              name: '订单列表',
               meta: {
                 authority: 'queryForm',
               },
@@ -97,186 +70,67 @@ const options = {
             },
             {
               path: 'query/detail/:id',
-              name: '查询详情',
+              name: '消费记录',
               meta: {
                 highlight: '/list/query',
                 invisible: true
               },
               component: () => import('@/pages/Demo')
-            },
-            {
-              path: 'primary',
-              name: '标准列表',
-              component: () => import('@/pages/list/StandardList'),
-            },
-            {
-              path: 'card',
-              name: '卡片列表',
-              component: () => import('@/pages/list/CardList'),
-            },
-            {
-              path: 'search',
-              name: '搜索列表',
-              component: () => import('@/pages/list/search/SearchLayout'),
-              children: [
-                {
-                  path: 'article',
-                  name: '文章',
-                  component: () => import('@/pages/list/search/ArticleList'),
-                },
-                {
-                  path: 'application',
-                  name: '应用',
-                  component: () => import('@/pages/list/search/ApplicationList'),
-                },
-                {
-                  path: 'project',
-                  name: '项目',
-                  component: () => import('@/pages/list/search/ProjectList'),
-                }
-              ]
             }
           ]
         },
         {
-          path: 'details',
-          name: '详情页',
+          path: 'primary',
+          name: '我的信息',
           meta: {
-            icon: 'profile'
+            icon: 'user'
           },
-          component: BlankView,
+          component: () => import('@/pages/list/StandardList'),
           children: [
             {
               path: 'basic',
-              name: '基础详情页',
-              component: () => import('@/pages/detail/BasicDetail')
+              name: '基本信息',
+              component: () => import('@/pages/form/basic'),
             },
             {
               path: 'advance',
-              name: '高级详情页',
-              component: () => import('@/pages/detail/AdvancedDetail')
+              name: '账户充值',
+              component: () => import('@/pages/detail/AdvancedDetail'),
             }
           ]
         },
         {
-          path: 'result',
-          name: '结果页',
-          meta: {
-            icon: 'check-circle-o',
-          },
-          component: PageView,
-          children: [
-            {
-              path: 'success',
-              name: '成功',
-              component: () => import('@/pages/result/Success')
-            },
-            {
-              path: 'error',
-              name: '失败',
-              component: () => import('@/pages/result/Error')
-            }
-          ]
-        },
-        {
-          path: 'exception',
-          name: '异常页',
-          meta: {
-            icon: 'warning',
-          },
-          component: BlankView,
-          children: [
-            {
-              path: '404',
-              name: 'Exp404',
-              component: () => import('@/pages/exception/404')
-            },
-            {
-              path: '403',
-              name: 'Exp403',
-              component: () => import('@/pages/exception/403')
-            },
-            {
-              path: '500',
-              name: 'Exp500',
-              component: () => import('@/pages/exception/500')
-            }
-          ]
-        },
-        {
-          path: 'components',
-          name: '内置组件',
-          meta: {
-            icon: 'appstore-o'
-          },
-          component: PageView,
-          children: [
-            {
-              path: 'taskCard',
-              name: '任务卡片',
-              component: () => import('@/pages/components/TaskCard')
-            },
-            {
-              path: 'palette',
-              name: '颜色复选框',
-              component: () => import('@/pages/components/Palette')
-            },
-            {
-              path: 'table',
-              name: '高级表格',
-              component: () => import('@/pages/components/table')
-            }
-          ]
-        },
-        {
-          name: '验权表单',
-          path: 'auth/form',
-          meta: {
-            icon: 'file-excel',
-            authority: {
-              permission: 'form'
-            }
-          },
-          component: () => import('@/pages/form/basic')
-        },
-        {
-          name: '带参菜单',
-          path: 'router/query',
-          meta: {
-            icon: 'project',
-            query: {
-              name: '菜单默认参数'
-            }
-          },
-          component: () => import('@/pages/Demo')
-        },
-        {
-          name: '动态路由菜单',
-          path: 'router/dynamic/:id',
-          meta: {
-            icon: 'project',
-            params: {
-              id: 123
-            }
-          },
-          component: () => import('@/pages/Demo')
-        },
-        {
-          name: 'Ant Design Vue',
-          path: 'antdv',
-          meta: {
-            icon: 'ant-design',
-            link: 'https://www.antdv.com/docs/vue/introduce-cn/'
-          }
-        },
-        {
-          name: '使用文档',
           path: 'document',
+          name: '通知公告',
           meta: {
-            icon: 'file-word',
-            link: 'https://iczer.gitee.io/vue-antd-admin-docs/'
-          }
-        }
+            icon: 'bell'
+          },
+          component: () => import('@/pages/list/search/SearchLayout'),
+        },
+        {
+          path: 'card',
+          name: '投诉管理',
+          meta: {
+            icon: 'frown'
+          },
+          component: () => import('@/pages/list/CardList'),
+        },
+        {
+          path: 'search',
+          name: '黑名单管理',
+          meta:{
+            icon: 'contacts'
+          },
+          component: () => import('@/pages/list/search/SearchLayout'),
+        },
+        {
+          path: 'help',
+          name: '帮助文档',
+          meta: {
+            icon: 'file-search'
+          },
+          component: () => import('@/pages/list/search/SearchLayout'),
+        },
       ]
     },
   ]

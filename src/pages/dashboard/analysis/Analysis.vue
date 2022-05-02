@@ -25,17 +25,6 @@
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6">
-        <chart-card :loading="loading" :title="$t('payments')" total="￥ 189,345">
-          <a-tooltip :title="$t('introduce')" slot="action">
-            <a-icon type="info-circle-o" />
-          </a-tooltip>
-          <div>
-            <mini-bar />
-          </div>
-          <div slot="footer">{{$t('conversion')}} <span>60%</span></div>
-        </chart-card>
-      </a-col>
-      <a-col :sm="24" :md="12" :xl="6">
         <chart-card :loading="loading" :title="$t('operating')" total="73%">
           <a-tooltip :title="$t('introduce')" slot="action">
             <a-icon type="info-circle-o" />
@@ -106,7 +95,6 @@
 <script>
 import ChartCard from '../../../components/card/ChartCard'
 import MiniArea from '../../../components/chart/MiniArea'
-import MiniBar from '../../../components/chart/MiniBar'
 import MiniProgress from '../../../components/chart/MiniProgress'
 import Bar from '../../../components/chart/Bar'
 import RankingList from '../../../components/chart/RankingList'
@@ -135,7 +123,7 @@ export default {
   created() {
     setTimeout(() => this.loading = !this.loading, 1000)
   },
-  components: {Trend, SalesData, HotSearch, RankingList, Bar, MiniProgress, MiniBar, MiniArea, ChartCard}
+  components: {Trend, SalesData, HotSearch, RankingList, Bar, MiniProgress, MiniArea, ChartCard}
 }
 </script>
 

@@ -28,12 +28,11 @@ import PageToggleTransition from '@/components/transition/PageToggleTransition'
 import {mapState, mapMutations} from 'vuex'
 import {getI18nKey} from '@/utils/routerUtil'
 import AKeepAlive from '@/components/cache/AKeepAlive'
-import TabsHead from '@/layouts/tabs/TabsHead'
 
 export default {
   name: 'TabsView',
   i18n: require('./i18n'),
-  components: {TabsHead, PageToggleTransition, Contextmenu, AdminLayout , AKeepAlive },
+  components: {PageToggleTransition, Contextmenu, AdminLayout , AKeepAlive },
   data () {
     return {
       clearCaches: [],
