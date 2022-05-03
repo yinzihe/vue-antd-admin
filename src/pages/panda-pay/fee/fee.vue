@@ -55,33 +55,6 @@
             </a-form-item>
           </a-col>
           </a-row>
-          <a-row v-if="advanced">
-          <a-col :md="8" :sm="24" >
-            <a-form-item
-              label="支付方式"
-              :labelCol="{span: 6}"
-              :wrapperCol="{span: 16, offset: 1}"
-            >
-              <a-select placeholder="请选择">
-                <a-select-option value="1">微信支付WAP</a-select-option>
-                <a-select-option value="2">支付宝V2当面付</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-          <a-col :md="8" :sm="24" >
-            <a-form-item
-              label="订单状态"
-              :labelCol="{span: 6}"
-              :wrapperCol="{span: 16, offset: 1}"
-            >
-              <a-select placeholder="请选择">
-                <a-select-option value="1">待支付</a-select-option>
-                <a-select-option value="2">已支付</a-select-option>
-                <a-select-option value="2">已退款</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-        </a-row>
         </div>
         <span style="float: right; margin-top: 3px;">
           <a-button type="primary">查询</a-button>
@@ -95,7 +68,7 @@
     </div>
     <div>
       <span style="margin-top:5px;"> 
-        <strong> 订单数：3391 订单总额：￥82329.10 </strong>
+        <strong> 手续费总金额：2324.31 </strong>
       </span>
       <span style="float: right; margin-top: 3px;">
           <a-button type="primary">导出查询结果至Excel</a-button>
@@ -154,27 +127,18 @@ const columns = [
     dataIndex: 'orderTitle'
   },
   {
-    title: '支付金额',
+    title: '订单金额',
     dataIndex: 'amount',
     customRender: (text) => '￥' + text 
-  },
-  {
-    title: '支付方式',
-    dataIndex: 'status',
-    scopedSlots: { customRender: 'channel' }
   },
   {
     title: '订单时间',
     dataIndex: 'createTime'
   },
   {
-    title: '状态',
-    dataIndex: 'status',
-    scopedSlots: { customRender: 'status' }
-  },
-  {
-    title: '操作',
-    scopedSlots: { customRender: 'action' }
+    title: '手续费金额',
+    dataIndex: 'fee',
+    customRender: (text) => '￥' + text 
   }
 ]
 
@@ -186,10 +150,11 @@ for (let i = 0; i < 100; i++) {
     merchantSn: 'MERCHANT_NO_ ' + Math.floor(Math.random() * 10000000000),
     appName: 'TEST_APP',
     orderTitle: 'ORDER'+Math.floor(Math.random() * 10000000000),
-    amount: Math.floor(Math.random() * 1000),
+    amount: (Math.floor(Math.random() * 10000)*0.1).toFixed(2),
     createTime: '2022-04-25 15:12:13',
     status:'已支付',
-    paySn:Math.floor(Math.random() * 10000000000000)
+    paySn:Math.floor(Math.random() * 10000000000000),
+    fee: (Math.floor(Math.random() * 1000)*0.02).toFixed(2)
   })
 }
 

@@ -70,11 +70,11 @@ const options = {
             },
             {
               path: 'query/detail/:id',
-              name: '消费记录',
+              name: '手续费明细',
               meta: {
                 highlight: '/list/query'
               },
-              component: () => import('@/pages/Demo')
+              component: () => import('@/pages/panda-pay/fee/fee')
             }
           ]
         },
@@ -84,7 +84,7 @@ const options = {
           meta: {
             icon: 'user'
           },
-          component: () => import('@/pages/list/StandardList'),
+          component: () => import('@/pages/panda-pay/profile/profile'),
           children: [
             {
               path: 'basic',
