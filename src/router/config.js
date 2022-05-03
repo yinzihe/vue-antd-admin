@@ -54,7 +54,7 @@ const options = {
         },
         {
           path: 'list',
-          name: '订单管理',
+          name: '对账中心',
           meta: {
             icon: 'table'
           },
@@ -62,7 +62,7 @@ const options = {
           children: [
             {
               path: 'orders',
-              name: '订单列表',
+              name: '订单明细',
               meta: {
                 authority: 'queryForm',
               },
@@ -102,7 +102,7 @@ const options = {
           path: 'document',
           name: '通知公告',
           meta: {
-            icon: 'bell'
+            icon: 'notification'
           },
           component: () => import('@/pages/list/search/SearchLayout'),
         },

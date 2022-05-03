@@ -1,8 +1,11 @@
 <template>
-  <a-card>
+  <a-card title="查询订单">
     <div :class="advanced ? 'search' : null">
       <a-form layout="horizontal">
         <div :class="advanced ? null: 'fold'">
+          <a-row>
+            <a-alert type="warning" title="仅保存最近1年交易订单"></a-alert>
+          </a-row>
           <a-row >
           <a-col :md="8" :sm="24" >
             <a-form-item
@@ -15,20 +18,20 @@
           </a-col>
           <a-col :md="8" :sm="24" >
             <a-form-item
+              label="订单号"
+              :labelCol="{span: 6}"
+              :wrapperCol="{span: 16, offset: 1}"
+            >
+              <a-input placeholder="请输入订单号" />
+            </a-form-item>
+          </a-col>
+          <a-col :md="8" :sm="24" >
+            <a-form-item
               label="商户订单号"
               :labelCol="{span: 6}"
               :wrapperCol="{span: 16, offset: 1}"
             >
               <a-input placeholder="请输入商户订单号" />
-            </a-form-item>
-          </a-col>
-          <a-col :md="8" :sm="24" >
-            <a-form-item
-              label="本站订单号"
-              :labelCol="{span: 6}"
-              :wrapperCol="{span: 16, offset: 1}"
-            >
-              <a-input placeholder="请输入" />
             </a-form-item>
           </a-col>
         </a-row>
@@ -91,31 +94,37 @@
       </a-form>
     </div>
     <div>
+      <span style="margin-top:5px;"> 
+        <strong> 订单数：3391 订单总额：￥82329.10 </strong>
+      </span>
+      <span style="float: right; margin-top: 3px;">
+          <a-button type="primary">导出查询结果至Excel</a-button>
+      </span>
       <standard-table
         :columns="columns"
         :dataSource="dataSource"
-        :selectedRows.sync="selectedRows"
         @clear="onClear"
         @change="onChange"
         @selectedRowChange="onSelectChange"
       >
-        <div slot="description" slot-scope="{text}">
-          {{text}}
+        <div slot="channel" slot-scope="{record}">
+          <a-row>
+            支付通道: <a-tag color="blue">微信支付WAP</a-tag>
+          </a-row>
+          <a-row>
+            交易时间: {{record.createTime}}
+          </a-row>
+          <a-row>
+            交易号: {{record.paySn}}
+          </a-row>
         </div>
-        <div slot="action" slot-scope="{text, record}">
+         <div slot="status" slot-scope="{text}">
+          <a-tag color="green">{{text}}</a-tag>
+        </div>
+        <div slot="action">
           <a style="margin-right: 8px">
-            <a-icon type="plus"/>新增
+            <a-button type="danger"> 退款</a-button>
           </a>
-          <a style="margin-right: 8px">
-            <a-icon type="edit"/>编辑
-          </a>
-          <a @click="deleteRecord(record.key)">
-            <a-icon type="delete" />删除1
-          </a>
-          <a @click="deleteRecord(record.key)" v-auth="`delete`">
-            <a-icon type="delete" />删除2
-          </a>
-          <router-link :to="`/list/query/detail/${record.key}`" >详情</router-link>
         </div>
         <template slot="statusTitle">
           <a-icon @click.native="onStatusTitleClick" type="info-circle" />
@@ -129,30 +138,39 @@
 import StandardTable from '@/components/table/StandardTable'
 const columns = [
   {
-    title: '规则编号',
-    dataIndex: 'no'
+    title: '订单号',
+    dataIndex: 'sn'
   },
   {
-    title: '描述',
-    dataIndex: 'description',
-    scopedSlots: { customRender: 'description' }
+    title: '商户订单号',
+    dataIndex: 'merchantSn'
   },
   {
-    title: '服务调用次数',
-    dataIndex: 'callNo',
-    sorter: true,
-    needTotal: true,
-    customRender: (text) => text + ' 次'
+    title: 'APP',
+    dataIndex: 'appName'
   },
   {
+    title: '订单标题',
+    dataIndex: 'orderTitle'
+  },
+  {
+    title: '支付金额',
+    dataIndex: 'amount',
+    customRender: (text) => '￥' + text 
+  },
+  {
+    title: '支付方式',
     dataIndex: 'status',
-    needTotal: true,
-    slots: {title: 'statusTitle'}
+    scopedSlots: { customRender: 'channel' }
   },
   {
-    title: '更新时间',
-    dataIndex: 'updatedAt',
-    sorter: true
+    title: '订单时间',
+    dataIndex: 'createTime'
+  },
+  {
+    title: '状态',
+    dataIndex: 'status',
+    scopedSlots: { customRender: 'status' }
   },
   {
     title: '操作',
@@ -164,12 +182,14 @@ const dataSource = []
 
 for (let i = 0; i < 100; i++) {
   dataSource.push({
-    key: i,
-    no: 'NO ' + i,
-    description: '这是一段描述',
-    callNo: Math.floor(Math.random() * 1000),
-    status: Math.floor(Math.random() * 10) % 4,
-    updatedAt: '2018-07-26'
+    sn: Math.floor(Math.random() * 10000000000),
+    merchantSn: 'MERCHANT_NO_ ' + Math.floor(Math.random() * 10000000000),
+    appName: 'TEST_APP',
+    orderTitle: 'ORDER'+Math.floor(Math.random() * 10000000000),
+    amount: Math.floor(Math.random() * 1000),
+    createTime: '2022-04-25 15:12:13',
+    status:'已支付',
+    paySn:Math.floor(Math.random() * 10000000000000)
   })
 }
 
