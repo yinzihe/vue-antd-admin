@@ -6,64 +6,76 @@
           <a-row >
           <a-col :md="8" :sm="24" >
             <a-form-item
-              label="规则编号"
-              :labelCol="{span: 5}"
-              :wrapperCol="{span: 18, offset: 1}"
+              label="APP_ID"
+              :labelCol="{span: 6}"
+              :wrapperCol="{span: 16, offset: 1}"
+            >
+              <a-input placeholder="请输入APP_ID" />
+            </a-form-item>
+          </a-col>
+          <a-col :md="8" :sm="24" >
+            <a-form-item
+              label="商户订单号"
+              :labelCol="{span: 6}"
+              :wrapperCol="{span: 16, offset: 1}"
+            >
+              <a-input placeholder="请输入商户订单号" />
+            </a-form-item>
+          </a-col>
+          <a-col :md="8" :sm="24" >
+            <a-form-item
+              label="本站订单号"
+              :labelCol="{span: 6}"
+              :wrapperCol="{span: 16, offset: 1}"
             >
               <a-input placeholder="请输入" />
-            </a-form-item>
-          </a-col>
-          <a-col :md="8" :sm="24" >
-            <a-form-item
-              label="使用状态"
-              :labelCol="{span: 5}"
-              :wrapperCol="{span: 18, offset: 1}"
-            >
-              <a-select placeholder="请选择">
-                <a-select-option value="1">关闭</a-select-option>
-                <a-select-option value="2">运行中</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-          <a-col :md="8" :sm="24" >
-            <a-form-item
-              label="调用次数"
-              :labelCol="{span: 5}"
-              :wrapperCol="{span: 18, offset: 1}"
-            >
-              <a-input-number style="width: 100%" placeholder="请输入" />
             </a-form-item>
           </a-col>
         </a-row>
           <a-row v-if="advanced">
           <a-col :md="8" :sm="24" >
             <a-form-item
-              label="更新日期"
-              :labelCol="{span: 5}"
-              :wrapperCol="{span: 18, offset: 1}"
+              label="起始日期"
+              :labelCol="{span: 6}"
+              :wrapperCol="{span: 16, offset: 1}"
             >
-              <a-date-picker style="width: 100%" placeholder="请输入更新日期" />
+              <a-date-picker style="width: 100%" placeholder="请输入查询起始日期" />
             </a-form-item>
           </a-col>
           <a-col :md="8" :sm="24" >
             <a-form-item
-              label="使用状态"
-              :labelCol="{span: 5}"
-              :wrapperCol="{span: 18, offset: 1}"
+              label="截止日期"
+              :labelCol="{span: 6}"
+              :wrapperCol="{span: 16, offset: 1}"
+            >
+              <a-date-picker style="width: 100%" placeholder="请输入截止起始日期" />
+            </a-form-item>
+          </a-col>
+          </a-row>
+          <a-row v-if="advanced">
+          <a-col :md="8" :sm="24" >
+            <a-form-item
+              label="支付方式"
+              :labelCol="{span: 6}"
+              :wrapperCol="{span: 16, offset: 1}"
             >
               <a-select placeholder="请选择">
-                <a-select-option value="1">关闭</a-select-option>
-                <a-select-option value="2">运行中</a-select-option>
+                <a-select-option value="1">微信支付WAP</a-select-option>
+                <a-select-option value="2">支付宝V2当面付</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
           <a-col :md="8" :sm="24" >
             <a-form-item
-              label="描述"
-              :labelCol="{span: 5}"
-              :wrapperCol="{span: 18, offset: 1}"
+              label="订单状态"
+              :labelCol="{span: 6}"
+              :wrapperCol="{span: 16, offset: 1}"
             >
-              <a-input placeholder="请输入" />
+              <a-select placeholder="请选择">
+                <a-select-option value="1">待支付</a-select-option>
+                <a-select-option value="2">已支付</a-select-option>
+                <a-select-option value="2">已退款</a-select-option>
+              </a-select>
             </a-form-item>
           </a-col>
         </a-row>
@@ -79,19 +91,6 @@
       </a-form>
     </div>
     <div>
-      <a-space class="operator">
-        <a-button @click="addNew" type="primary">新建</a-button>
-        <a-button >批量操作</a-button>
-        <a-dropdown>
-          <a-menu @click="handleMenuClick" slot="overlay">
-            <a-menu-item key="delete">删除</a-menu-item>
-            <a-menu-item key="audit">审批</a-menu-item>
-          </a-menu>
-          <a-button>
-            更多操作 <a-icon type="down" />
-          </a-button>
-        </a-dropdown>
-      </a-space>
       <standard-table
         :columns="columns"
         :dataSource="dataSource"

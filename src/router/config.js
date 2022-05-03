@@ -46,9 +46,9 @@ const options = {
           component: PageView,
           children: [
             {
-              path: 'basic',
+              path: 'channel',
               name: '我的支付渠道',
-              component: () => import('@/pages/form/basic'),
+              component: () => import('@/pages/panda-pay/channel/channels'),
             }
           ]
         },
@@ -61,19 +61,18 @@ const options = {
           component: PageView,
           children: [
             {
-              path: 'query',
+              path: 'orders',
               name: '订单列表',
               meta: {
                 authority: 'queryForm',
               },
-              component: () => import('@/pages/list/QueryList'),
+              component: () => import('@/pages/panda-pay/order/orders'),
             },
             {
               path: 'query/detail/:id',
               name: '消费记录',
               meta: {
-                highlight: '/list/query',
-                invisible: true
+                highlight: '/list/query'
               },
               component: () => import('@/pages/Demo')
             }

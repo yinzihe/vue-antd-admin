@@ -2,7 +2,7 @@
 module.exports = {
   lang: 'CN',                           //语言，可选 CN(简体)、HK(繁体)、US(英语)，也可扩展其它语言
   theme: {                              //主题
-    color: '#1890ff',                   //主题色
+    color: '#3eaf7c',                   //主题色
     mode: 'light',                       //主题模式 可选 dark、 light 和 night
     success: '#52c41a',                 //成功色
     warning: '#faad14',                 //警告色
@@ -18,7 +18,7 @@ module.exports = {
   cachePage: true,                      //是否缓存页面数据，仅多页签模式下生效，true 缓存, false 不缓存
   hideSetting: false,                   //隐藏设置抽屉，true:隐藏，false:不隐藏
   systemName: 'PANDA PAY',         //系统名称
-  copyright: '苏州盛夏光年科技有限公司 2022 ',     //copyright
+  copyright: '苏州盛夏光年科技有限公司 2022',     //copyright
   asyncRoutes: false,                   //异步加载路由，true:开启，false:不开启
   showPageTitle: true,                  //是否显示页面标题（PageLayout 布局中的页面标题），true:显示，false:不显示
   filterMenu: true,                    //根据权限过滤菜单，true:过滤，false:不过滤
